@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicasCRM.Api", "ClinicasCRM\ClinicasCRM.Api.csproj", "{321332BE-BD33-4E30-B716-3122C34C5C2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicasCRM.Api", "ClinicasCRM.Api\ClinicasCRM.Api.csproj", "{321332BE-BD33-4E30-B716-3122C34C5C2D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicasCRM.Core", "ClinicasCRM.Core\ClinicasCRM.Core.csproj", "{F541E48F-5333-456F-B966-5D34701EA48F}"
 EndProject
