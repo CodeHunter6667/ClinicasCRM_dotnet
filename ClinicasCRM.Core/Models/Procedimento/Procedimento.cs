@@ -10,4 +10,5 @@ public class Procedimento : EntidadeBase
     public string CosumoProdutos { get; set; } = string.Empty;
     public decimal Preco { get; set; }
     public EFormaPagamento FormaPagamento { get; set; }
+    public List<Agendamento.Agendamento> Agendamentos { get; set; } = new List<Agendamento.Agendamento>();
 }
