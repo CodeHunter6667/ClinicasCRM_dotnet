@@ -47,5 +47,10 @@ public class AnamneseMapping : IEntityTypeConfiguration<Anamnese>
         builder.HasOne(a => a.Habitos)
             .WithMany(x => x.Anamneses)
             .HasForeignKey("HabitosId");
+
+        builder.HasDiscriminator<string>("TipoAnamnese")
+            .HasValue<Anamnese>("Anamnese")
+            .HasValue<AnamneseCorporal>("AnamneseCorporal")
+            .HasValue<AnamneseFacial>("AnamneseFacial");
     }
 }
