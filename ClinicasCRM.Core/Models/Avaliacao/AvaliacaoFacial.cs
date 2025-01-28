@@ -1,5 +1,6 @@
 ﻿using ClinicasCRM.Core.Enums;
 using ClinicasCRM.Core.Models.Base;
+using ClinicasCRM.Core.Models.Consulta;
 using ClinicasCRM.Core.Models.Pessoa;
 
 namespace ClinicasCRM.Core.Models.Avaliacao;
@@ -20,4 +21,5 @@ public class AvaliacaoFacial : EntidadeBase
     public EClassificacaoSensibilidade ClassificacaoSensibilidade { get; set; }
     public string Observacoes { get; set; } = string.Empty;
     public PessoaFisica Cliente { get; set; } = new();
+    public List<AnamneseFacial> AnamnesesFaciais { get; set; } = new();
 }
