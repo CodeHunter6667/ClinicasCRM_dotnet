@@ -6,6 +6,5 @@ namespace ClinicasCRM.Core.Models.Consulta;
 public class Anamnese : EntidadeBase
 {
     public PessoaFisica Cliente { get; set; } = new ();
-    public HistoricoPaciente Historico { get; set; } = new ();
-    public Habitos Habitos { get; set; } = new();
+    public long ClienteId { get; set; }
 }

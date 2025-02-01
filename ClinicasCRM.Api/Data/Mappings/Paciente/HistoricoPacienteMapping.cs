@@ -78,5 +78,9 @@ public class HistoricoPacienteMapping : IEntityTypeConfiguration<HistoricoPacien
         builder.Property(x => x.FazTratamentoMedico)
             .IsRequired()
             .HasColumnType("SMALLINT");
+
+        builder.HasOne(x => x.Cliente)
+            .WithMany(x => x.Historicos)
+            .HasForeignKey("ClienteId");
     }
 }

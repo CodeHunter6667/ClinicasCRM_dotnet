@@ -1,5 +1,6 @@
 ﻿using ClinicasCRM.Core.Models.Base;
 using ClinicasCRM.Core.Models.Consulta;
+using ClinicasCRM.Core.Models.Pessoa;
 
 namespace ClinicasCRM.Core.Models.Paciente;
 public class HistoricoPaciente : EntidadeBase
@@ -14,5 +15,6 @@ public class HistoricoPaciente : EntidadeBase
     public bool ProtesesDentarias { get; set; }
     public bool Epilepsia { get; set; }
     public bool FazTratamentoMedico { get; set; }
-    public List<Anamnese> Anamneses { get; set; } = new List<Anamnese>();
+    public long ClienteId { get; set; }
+    public PessoaFisica Cliente { get; set; } = new();
 }

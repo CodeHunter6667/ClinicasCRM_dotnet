@@ -21,5 +21,6 @@ public class AvaliacaoFacial : EntidadeBase
     public EClassificacaoSensibilidade ClassificacaoSensibilidade { get; set; }
     public string Observacoes { get; set; } = string.Empty;
     public PessoaFisica Cliente { get; set; } = new();
+    public long ClienteId { get; set; }
     public List<AnamneseFacial> AnamnesesFaciais { get; set; } = new();
 }

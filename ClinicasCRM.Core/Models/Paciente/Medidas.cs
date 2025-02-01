@@ -1,5 +1,6 @@
 ﻿using ClinicasCRM.Core.Models.Avaliacao;
 using ClinicasCRM.Core.Models.Base;
+using ClinicasCRM.Core.Models.Pessoa;
 
 namespace ClinicasCRM.Core.Models.Paciente;
 public class Medidas : EntidadeBase
@@ -16,5 +17,7 @@ public class Medidas : EntidadeBase
     public double PanturrilhaEsquerda { get; set; }
     public double PanturrilhaDireita { get; set; }
     public DateTime DataMedicao { get; set; }
+    public long ClienteId { get; set; }
+    public PessoaFisica Cliente { get; set; } = new();
     public List<AvaliacaoCorporal> AvaliacoesCorporais { get; set; } = new List<AvaliacaoCorporal>();
 }

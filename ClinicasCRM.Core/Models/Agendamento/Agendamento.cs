@@ -6,8 +6,10 @@ namespace ClinicasCRM.Core.Models.Agendamento;
 public class Agendamento : EntidadeBase
 {
     public PessoaFisica Cliente { get; set; } = new();
+    public long ClienteId { get; set; }
     public string SalaAtendimento { get; set; } = string.Empty;
     public Procedimento.Procedimento Procedimento{ get; set; } = new();
+    public long ProcedimentoId { get; set; }
     public int Duracao { get; set; }
     public DateTime DiaAtendimento { get; set; }
     public string Profissional { get; set; } = string.Empty;

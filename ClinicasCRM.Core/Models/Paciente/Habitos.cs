@@ -1,6 +1,6 @@
 ﻿using ClinicasCRM.Core.Enums;
 using ClinicasCRM.Core.Models.Base;
-using ClinicasCRM.Core.Models.Consulta;
+using ClinicasCRM.Core.Models.Pessoa;
 
 namespace ClinicasCRM.Core.Models.Paciente;
 public class Habitos : EntidadeBase
@@ -16,5 +16,6 @@ public class Habitos : EntidadeBase
     public EFrequenciaConsumoAlcool ConsumoAlcool { get; set; }
     public string AcidosUsados { get; set; } = string.Empty;
     public bool UsaProtetorSolarDiario { get; set; }
-    public List<Anamnese> Anamneses { get; set; } = new List<Anamnese>();
+    public long ClienteId { get; set; }
+    public PessoaFisica Cliente { get; set; } = new();
 }

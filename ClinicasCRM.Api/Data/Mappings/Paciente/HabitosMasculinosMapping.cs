@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ClinicasCRM.Api.Data.Mappings.Paciente;
 
-public class HabitosMapping : IEntityTypeConfiguration<Habitos>
+public class HabitosMasculinosMapping : IEntityTypeConfiguration<HabitosMasculinos>
 {
-    public void Configure(EntityTypeBuilder<Habitos> builder)
+    public void Configure(EntityTypeBuilder<HabitosMasculinos> builder)
     {
-        builder.ToTable("Habitos");
+        builder.ToTable("HabitosMasculinos");
 
         builder.HasKey(a => a.Id);
 
@@ -81,8 +81,8 @@ public class HabitosMapping : IEntityTypeConfiguration<Habitos>
             .IsRequired()
             .HasColumnType("SMALLINT");
 
-        builder.HasDiscriminator<string>("TipoHabitos")
-            .HasValue<Habitos>("Habitos")
-            .HasValue<HabitosFemininos>("HabitosFemininos");
+        builder.HasOne(x => x.Cliente)
+            .WithMany(x => x.HabitosMasculinos)
+            .HasForeignKey("ClienteId");
     }
 }

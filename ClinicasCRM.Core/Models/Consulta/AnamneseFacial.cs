@@ -4,4 +4,5 @@ namespace ClinicasCRM.Core.Models.Consulta;
 public class AnamneseFacial : Anamnese
 {
     public AvaliacaoFacial AvaliacaoFacial { get; set; } = new();
+    public long AvaliacaoFacialId { get; set; }
 }

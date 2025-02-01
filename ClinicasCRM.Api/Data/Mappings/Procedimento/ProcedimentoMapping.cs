@@ -49,7 +49,7 @@ public class ProcedimentoMapping : IEntityTypeConfiguration<ClinicasCRM.Core.Mod
             .HasColumnType("VARCHAR")
             .HasMaxLength(100);
 
-        builder.Property(x => x.CosumoProdutos)
+        builder.Property(x => x.ConsumoProdutos)
             .IsRequired()
             .HasColumnType("VARCHAR")
             .HasMaxLength(100);

@@ -51,8 +51,8 @@ public class PessoaFisicaMapping : IEntityTypeConfiguration<PessoaFisica>
             .HasColumnType("SMALLINT");
 
         builder.HasOne(x => x.Endereco)
-            .WithOne()
-            .HasForeignKey<PessoaFisica>(x => x.Endereco.Id);
+            .WithMany(x => x.PessoasFisicas)
+            .HasForeignKey("EnderecoId");
 
         builder.Property(x => x.NomeCompleto)
             .IsRequired()

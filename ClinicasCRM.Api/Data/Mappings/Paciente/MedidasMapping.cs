@@ -83,5 +83,9 @@ public class MedidasMapping : IEntityTypeConfiguration<Medidas>
         builder.Property(x => x.DataMedicao)
             .IsRequired()
             .HasColumnType("TIMESTAMP");
+
+        builder.HasOne(x => x.Cliente)
+            .WithMany(x => x.Medidas)
+            .HasForeignKey("ClienteId");
     }
 }
