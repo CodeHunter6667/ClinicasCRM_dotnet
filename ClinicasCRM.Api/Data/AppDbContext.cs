@@ -15,17 +15,16 @@ public class AppDbContext : DbContext
     {
     }
 
-    public DbSet<PessoaFisica> PessoasFisica { get; set; }
-    public DbSet<PessoaJuridica> PessoasJuridica { get; set; }
+    public DbSet<PessoaFisica> PessoasFisicas { get; set; }
+    public DbSet<PessoaJuridica> PessoasJuridicas { get; set; }
     public DbSet<Procedimento> Procedimentos { get; set; }
-    public DbSet<Habitos> Habitos { get; set; }
+    public DbSet<HabitosMasculinos> HabitosMasculinos { get; set; }
     public DbSet<HabitosFemininos> HabitosFemininos { get; set; }
     public DbSet<Medidas> Medidas { get; set; }
-    public DbSet<Anamnese> Anamneses { get; set; }
-    public DbSet<AnamneseCorporal> AnamnesesCorporal { get; set; }
-    public DbSet<AnamneseFacial> AnamnesesFacial { get; set; }
-    public DbSet<AvaliacaoCorporal> AvaliacoesCorporal { get; set; }
-    public DbSet<AvaliacaoFacial> AvaliacoesFacial { get; set; }
+    public DbSet<AnamneseCorporal> AnamnesesCorporais { get; set; }
+    public DbSet<AnamneseFacial> AnamnesesFaciais { get; set; }
+    public DbSet<AvaliacaoCorporal> AvaliacoesCorporais { get; set; }
+    public DbSet<AvaliacaoFacial> AvaliacoesFaciais { get; set; }
     public DbSet<Agendamento> Agendamentos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
