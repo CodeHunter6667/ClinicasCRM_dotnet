@@ -1,5 +1,4 @@
 ﻿using ClinicasCRM.Core.Models.Base;
-using ClinicasCRM.Core.Models.Paciente;
 using ClinicasCRM.Core.Models.Pessoa;
 
 namespace ClinicasCRM.Core.Models.Consulta;

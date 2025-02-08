@@ -1,5 +1,5 @@
-﻿using ClinicasCRM.Core.Models.Avaliacao;
-using ClinicasCRM.Core.Models.Base;
+﻿using ClinicasCRM.Core.Models.Base;
+using ClinicasCRM.Core.Models.Consulta;
 using ClinicasCRM.Core.Models.Pessoa;
 
 namespace ClinicasCRM.Core.Models.Paciente;
@@ -19,5 +19,5 @@ public class Medidas : EntidadeBase
     public DateTime DataMedicao { get; set; }
     public long ClienteId { get; set; }
     public PessoaFisica Cliente { get; set; } = new();
-    public List<AvaliacaoCorporal> AvaliacoesCorporais { get; set; } = new List<AvaliacaoCorporal>();
+    public List<AnamneseCorporal> AnamnesesCorporais { get; set; } = new List<AnamneseCorporal>();
 }
