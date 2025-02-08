@@ -35,9 +35,63 @@ public class AnamneseFacialMapping : IEntityTypeConfiguration<AnamneseFacial>
             .IsRequired()
             .HasColumnType("BIGINT");
 
-        builder.HasOne(x => x.AvaliacaoFacial)
-            .WithMany(x => x.AnamnesesFaciais)
-            .HasForeignKey("AvaliacaoFacialId");
+        builder.Property(a => a.PrincipaisQueixas)
+           .IsRequired()
+           .HasColumnType("VARCHAR")
+           .HasMaxLength(500);
+
+        builder.Property(x => x.PresencaManchasPigmentaresRelacionadasMelanina)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.PresencasManchasAlteracaoVascular)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.FormacoesSolidas)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.FormacoesComConteudoLiquido)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.LesoesDePele)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.SequelasOuCicatrizes)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.AlteracoesPelosFaciais)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.AlteracoesQueratinizacao)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.ClassificacaoCutanea)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.ClassificacaoEspessura)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.ClassificacaoOleosidade)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.ClassificacaoSensibilidade)
+            .IsRequired()
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.Observacoes)
+            .IsRequired(false)
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(500);
 
         builder.HasOne(a => a.Cliente)
             .WithMany(x => x.AnamneseFaciais)

@@ -1,5 +1,4 @@
 ﻿using ClinicasCRM.Core.Models.Agendamento;
-using ClinicasCRM.Core.Models.Avaliacao;
 using ClinicasCRM.Core.Models.Consulta;
 using ClinicasCRM.Core.Models.Paciente;
 using ClinicasCRM.Core.Models.Pessoa;
@@ -23,8 +22,6 @@ public class AppDbContext : DbContext
     public DbSet<Medidas> Medidas { get; set; }
     public DbSet<AnamneseCorporal> AnamnesesCorporais { get; set; }
     public DbSet<AnamneseFacial> AnamnesesFaciais { get; set; }
-    public DbSet<AvaliacaoCorporal> AvaliacoesCorporais { get; set; }
-    public DbSet<AvaliacaoFacial> AvaliacoesFaciais { get; set; }
     public DbSet<Agendamento> Agendamentos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

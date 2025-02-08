@@ -36,12 +36,30 @@ public class AnamneseCorporalMapping : IEntityTypeConfiguration<AnamneseCorporal
             .IsRequired()
             .HasColumnType("BIGINT");
 
-        builder.HasOne(x => x.AvaliacaoCorporal)
-            .WithMany(x => x.AnamnesesCorporal)
-            .HasForeignKey("AvaliacaoCorporalId");
+        builder.Property(x => x.PrincipaisQueixas)
+            .IsRequired()
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(500);
+
+        builder.Property(x => x.AnotacoesTratamentoEscolhido)
+            .IsRequired()
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(500);
+
+        builder.Property(x => x.DataAvaliacao)
+            .IsRequired()
+            .HasColumnType("TIMESTAMP");
+
+        builder.Property(x => x.Observacoes)
+            .IsRequired(false)
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(500);
 
         builder.HasOne(a => a.Cliente)
             .WithMany(x => x.AnamnesesCorporais)
             .HasForeignKey("ClienteId");
+        builder.HasOne(x => x.Medidas)
+            .WithMany(x => x.AnamnesesCorporais)
+            .HasForeignKey("MedidasId");
     }
 }
