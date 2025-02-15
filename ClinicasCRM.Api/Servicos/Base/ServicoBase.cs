@@ -2,8 +2,6 @@
 using ClinicasCRM.Api.Servicos.Base.Interfaces;
 using ClinicasCRM.Core.Exceptions;
 using ClinicasCRM.Core.Models.Base;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq.Expressions;
 
 namespace ClinicasCRM.Api.Servicos.Base;
@@ -31,47 +29,47 @@ public abstract class ServicoBase<T, TRepositorio> :
         
     }
 
-    public IEnumerable<T> Todos()
-        => _repositorio.Todos();
+    public async Task<IEnumerable<T>> TodosAsync()
+        => await _repositorio.TodosAsync();
 
-    public T? Obter(Expression<Func<T, bool>> predicado)
+    public async Task<T?> ObterAsync(Expression<Func<T, bool>> predicado)
     {
-        var entidade = _repositorio.Obter(predicado);
+        var entidade = await _repositorio.ObterAsync(predicado);
         if (entidade is null)
             throw new NotFoundException("Não encontrado nenhum registro com esses dados");
         return entidade;
     }
 
-    public T? Obter(long id)
+    public async Task<T?> ObterAsync(long id)
     {
-        var entidade = _repositorio.Obter(id);
+        var entidade = await _repositorio.ObterAsync(id);
         if (entidade is null)
             throw new NotFoundException("Não encontrado nenhum registro com esses dados");
         return entidade;
     }
 
-    public void InserirOuAtualizar(T entidade)
+    public async Task InserirOuAtualizarAsync(T entidade)
     {
         if (entidade is null)
             throw new ArgumentNullException("Dados inválidos");
 
         if (entidade.EstaSalva)
-            _repositorio.Inserir(entidade);
+            await _repositorio.InserirAsync(entidade);
         else
-            _repositorio.Atualizar(entidade);
+            await _repositorio.AtualizarAsync(entidade);
     }
 
-    public void Atualizar(T entidade)
-        => _repositorio.Atualizar(entidade);
+    public async Task<T> AtualizarAsync(T entidade)
+        => await _repositorio.AtualizarAsync(entidade);
 
-    public void Inserir(T entidade)
-        => _repositorio.Inserir(entidade);
+    public async Task<T> InserirAsync(T entidade)
+        => await _repositorio.InserirAsync(entidade);
 
-    public void Deletar(long id)
+    public async Task DeletarAsync(long id)
     {
-        var entidade = _repositorio.Obter(id);
+        var entidade = await _repositorio.ObterAsync(id);
         if (entidade is null)
             throw new NotFoundException("Não encontrado nenhum registro com esses dados");
-        _repositorio.Deletar(entidade);
+        await _repositorio.DeletarAsync(entidade);
     }
 }

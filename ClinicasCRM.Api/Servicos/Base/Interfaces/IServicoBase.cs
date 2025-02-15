@@ -7,11 +7,11 @@ public interface IServicoBase { }
 
 public interface IServicoBase<T> where T : EntidadeBase
 {
-    IEnumerable<T> Todos();
-    T? Obter(Expression<Func<T, bool>> predicado);
-    T? Obter(long id);
-    void InserirOuAtualizar(T entidade);
-    void Atualizar(T entidade);
-    void Inserir(T entidade);
-    void Deletar(long id);
+    Task<IEnumerable<T>> TodosAsync();
+    Task<T?> ObterAsync(Expression<Func<T, bool>> predicado);
+    Task<T?> ObterAsync(long id);
+    Task InserirOuAtualizarAsync(T entidade);
+    Task<T> AtualizarAsync(T entidade);
+    Task<T> InserirAsync(T entidade);
+    Task DeletarAsync(long id);
 }
