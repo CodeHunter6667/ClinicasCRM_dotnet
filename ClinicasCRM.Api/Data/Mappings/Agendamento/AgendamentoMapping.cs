@@ -40,18 +40,18 @@ public class AgendamentoMapping : IEntityTypeConfiguration<ClinicasCRM.Core.Mode
             .HasColumnType("VARCHAR")
             .HasMaxLength(80);
 
-        builder.Property(x => x.DiaAtendimento)
+        builder.Property(x => x.DataAtendimento)
             .IsRequired()
-            .HasColumnType("TIMESTAMP");
+            .HasColumnType("DATE");
 
         builder.Property(x => x.Profissional)
             .IsRequired()
             .HasColumnType("VARCHAR")
             .HasMaxLength(80);
 
-        builder.Property(x => x.Duracao)
+        builder.Property(x => x.HoraAtendimento)
             .IsRequired()
-            .HasColumnType("INTEGER");
+            .HasColumnType("TIME WITHOUT TIME ZONE");
 
         builder.Property(x => x.StatusAtendimento)
             .IsRequired()
