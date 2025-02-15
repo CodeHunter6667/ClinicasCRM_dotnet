@@ -9,8 +9,8 @@ public class AgendamentoDto
     public long ClienteId { get; set; }
     public string SalaAtendimento { get; set; } = string.Empty;
     public long ProcedimentoId { get; set; }
-    public int Duracao { get; set; }
-    public DateTime DiaAtendimento { get; set; }
+    public TimeSpan HoraAtendimento { get; set; }
+    public DateTime DataAtendimento { get; set; }
     public string Profissional { get; set; } = string.Empty;
     public EStatusAtendimento StatusAtendimento { get; set; }
 
@@ -20,8 +20,8 @@ public class AgendamentoDto
         ClienteId = agendamento.ClienteId;
         SalaAtendimento = agendamento.SalaAtendimento;
         ProcedimentoId = agendamento.ProcedimentoId;
-        Duracao = agendamento.Duracao;
-        DiaAtendimento = agendamento.DiaAtendimento;
+        HoraAtendimento = agendamento.HoraAtendimento;
+        DataAtendimento = agendamento.DataAtendimento;
         Profissional = agendamento.Profissional;
         StatusAtendimento = agendamento.StatusAtendimento;
     }

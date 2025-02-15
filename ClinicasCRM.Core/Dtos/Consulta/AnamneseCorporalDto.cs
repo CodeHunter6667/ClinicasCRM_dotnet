@@ -6,6 +6,7 @@ namespace ClinicasCRM.Core.Dtos.Consulta;
 public class AnamneseCorporalDto
 {
     public long Id { get; set; }
+    public bool EstaSalva { get; set; }
     public string PrincipaisQueixas { get; set; } = string.Empty;
     public long MedidasId { get; set; }
     public string AnotacoesTratamentoEscolhido { get; set; } = string.Empty;
@@ -16,6 +17,7 @@ public class AnamneseCorporalDto
     public AnamneseCorporalDto(AnamneseCorporal anamnese)
     {
         Id = anamnese.Id;
+        EstaSalva = anamnese.EstaSalva;
         PrincipaisQueixas = anamnese.PrincipaisQueixas;
         MedidasId = anamnese.MedidasId;
         AnotacoesTratamentoEscolhido = anamnese.AnotacoesTratamentoEscolhido;
