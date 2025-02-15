@@ -15,36 +15,38 @@ public class RepositorioBase<T> : IRepositorioBase<T> where T : EntidadeBase
         _context = context;
     }
 
-    public void Atualizar(T entidade)
+    public async Task<T> AtualizarAsync(T entidade)
     {
-        _context.Set<T>().Update(entidade);
-        _context.SaveChanges();
+        var entidadeSalva = _context.Set<T>().Update(entidade);
+        await _context.SaveChangesAsync();
+        return entidadeSalva.Entity;
     }
 
-    public void Deletar(T entidade)
+    public async Task DeletarAsync(T entidade)
     {
         _context.Set<T>().Remove(entidade);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Inserir(T entidade)
+    public async Task<T> InserirAsync(T entidade)
     {
-        _context.Set<T>().Add(entidade);
-        _context.SaveChanges();
+        var entidadeSalva = await _context.Set<T>().AddAsync(entidade);
+        await _context.SaveChangesAsync();
+        return entidadeSalva.Entity;
     }
 
-    public T? Obter(Expression<Func<T, bool>> predicado)
+    public async Task<T?> ObterAsync(Expression<Func<T, bool>> predicado)
     {
-        return _context.Set<T>().AsNoTracking().FirstOrDefault(predicado);
+        return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicado);
     }
 
-    public T? Obter(long id)
+    public async Task<T?> ObterAsync(long id)
     {
-        return _context.Set<T>().AsNoTracking().FirstOrDefault(x => x.Id == id);
+        return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public IEnumerable<T> Todos()
+    public async Task<IEnumerable<T>> TodosAsync()
     {
-        return _context.Set<T>().AsNoTracking();
+        return await _context.Set<T>().AsNoTracking().ToListAsync();
     }
 }

@@ -9,10 +9,10 @@ public interface IRepositorioBase
 
 public interface IRepositorioBase<T> : IRepositorioBase where T : EntidadeBase
 {
-    void Inserir(T entidade);
-    void Atualizar(T entidade);
-    void Deletar(T entidade);
-    T? Obter(Expression<Func<T, bool>> predicado);
-    T? Obter(long id);
-    IEnumerable<T> Todos();
+    Task<T> InserirAsync(T entidade);
+    Task<T> AtualizarAsync(T entidade);
+    Task DeletarAsync(T entidade);
+    Task<T?> ObterAsync(Expression<Func<T, bool>> predicado);
+    Task<T?> ObterAsync(long id);
+    Task<IEnumerable<T>> TodosAsync();
 }
