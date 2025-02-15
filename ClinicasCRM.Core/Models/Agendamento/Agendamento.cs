@@ -10,8 +10,8 @@ public class Agendamento : EntidadeBase
     public string SalaAtendimento { get; set; } = string.Empty;
     public Procedimento.Procedimento Procedimento{ get; set; } = new();
     public long ProcedimentoId { get; set; }
-    public int Duracao { get; set; }
-    public DateTime DiaAtendimento { get; set; }
+    public TimeSpan HoraAtendimento { get; set; }
+    public DateTime DataAtendimento { get; set; }
     public string Profissional { get; set; } = string.Empty;
     public EStatusAtendimento StatusAtendimento { get; set; }
 }
