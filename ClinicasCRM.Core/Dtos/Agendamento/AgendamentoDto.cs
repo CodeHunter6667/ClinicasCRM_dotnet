@@ -13,6 +13,7 @@ public class AgendamentoDto
     public DateTime DataAtendimento { get; set; }
     public string Profissional { get; set; } = string.Empty;
     public EStatusAtendimento StatusAtendimento { get; set; }
+    public string UsuarioId { get; set; } = string.Empty;
 
     public AgendamentoDto(Models.Agendamento.Agendamento agendamento)
     {
@@ -24,6 +25,7 @@ public class AgendamentoDto
         DataAtendimento = agendamento.DataAtendimento;
         Profissional = agendamento.Profissional;
         StatusAtendimento = agendamento.StatusAtendimento;
+        UsuarioId = agendamento.UsuarioId;
     }
 
     [JsonConstructor]

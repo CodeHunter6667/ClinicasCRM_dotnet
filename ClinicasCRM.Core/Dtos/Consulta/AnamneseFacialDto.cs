@@ -21,6 +21,7 @@ public class AnamneseFacialDto
     public EClassificacaoOleosidade ClassificacaoOleosidade { get; set; }
     public EClassificacaoSensibilidade ClassificacaoSensibilidade { get; set; }
     public string Observacoes { get; set; } = string.Empty;
+    public string UsuarioId { get; set; } = string.Empty;
     public long ClienteId { get; set; }
 
     public AnamneseFacialDto(AnamneseFacial anamnese)
@@ -41,6 +42,7 @@ public class AnamneseFacialDto
         ClassificacaoSensibilidade = anamnese.ClassificacaoSensibilidade;
         Observacoes = anamnese.Observacoes;
         ClienteId = anamnese.ClienteId;
+        UsuarioId = anamnese.UsuarioId;
     }
 
     [JsonConstructor]

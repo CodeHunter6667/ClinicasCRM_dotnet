@@ -12,6 +12,7 @@ public class AnamneseCorporalDto
     public string AnotacoesTratamentoEscolhido { get; set; } = string.Empty;
     public DateTime DataAvaliacao { get; set; } = DateTime.Now;
     public string Observacoes { get; set; } = string.Empty;
+    public string UsuarioId { get; set; } = string.Empty;
     public long ClienteId { get; set; }
 
     public AnamneseCorporalDto(AnamneseCorporal anamnese)
@@ -24,6 +25,7 @@ public class AnamneseCorporalDto
         DataAvaliacao = anamnese.DataAvaliacao;
         Observacoes = anamnese.Observacoes;
         ClienteId = anamnese.ClienteId;
+        UsuarioId = anamnese.UsuarioId;
     }
 
     [JsonConstructor]
