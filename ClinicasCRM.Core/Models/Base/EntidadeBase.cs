@@ -7,5 +7,5 @@ public class EntidadeBase
     public DateTime DataCriacao { get; set; } = DateTime.Now;
     public DateTime? DataAlteracao { get; set; }
     public string UsuarioAlteracao { get; set; } = string.Empty;
-    public long UsuarioId { get; set; }
+    public string UsuarioId { get; set; } = string.Empty;
 }
