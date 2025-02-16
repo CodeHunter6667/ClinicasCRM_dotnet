@@ -17,8 +17,8 @@ public abstract class ServicoBase<T> :
         _context = context;
     }
 
-    public async Task<IEnumerable<T>> TodosAsync()
-        => await _context.Set<T>().AsNoTracking().ToListAsync();
+    public async Task<IEnumerable<T>> TodosAsync(string usuarioId)
+        => await _context.Set<T>().AsNoTracking().Where(x => x.UsuarioId.Equals(usuarioId, StringComparison.InvariantCultureIgnoreCase)).ToListAsync();
 
     public async Task<T?> ObterAsync(Expression<Func<T, bool>> predicado)
     {
@@ -28,9 +28,9 @@ public abstract class ServicoBase<T> :
         return entidade;
     }
 
-    public async Task<T?> ObterAsync(long id)
+    public async Task<T?> ObterAsync(long id, string usuarioId)
     {
-        var entidade = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        var entidade = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id && x.UsuarioId.Equals(usuarioId, StringComparison.InvariantCultureIgnoreCase));
         if (entidade is null)
             throw new NotFoundException("Não encontrado nenhum registro com esses dados");
         return entidade;
@@ -51,12 +51,10 @@ public abstract class ServicoBase<T> :
     {
         if (entidade is null)
             throw new ArgumentNullException("Dados inválidos");
-        var entidadeExistente = await ObterAsync(entidade.Id);
         entidade.DataAlteracao = DateTime.Now;
-        entidadeExistente = entidade;
-        _context.Update(entidadeExistente);
+        _context.Update(entidade);
         await _context.SaveChangesAsync();
-        return entidadeExistente;
+        return entidade;
     }
 
     public async Task<T> InserirAsync(T entidade)
@@ -69,9 +67,9 @@ public abstract class ServicoBase<T> :
         return entidade;
     }
 
-    public async Task DeletarAsync(long id)
+    public async Task DeletarAsync(long id, string usuarioId)
     {
-        var entidade = await ObterAsync(id);
+        var entidade = await ObterAsync(id, usuarioId);
         if (entidade is null)
             throw new NotFoundException("Não encontrado nenhum registro com esses dados");
 

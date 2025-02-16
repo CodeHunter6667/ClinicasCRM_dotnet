@@ -11,25 +11,47 @@ namespace ClinicasCRM.Api.Servicos.Consulta;
 
 public class AnamneseCorporalService : ServicoBase<AnamneseCorporal>, IAnamneseCorporalService
 {
-    private readonly IMapper mapper;
+    private readonly IMapper _mapper;
 
-    public AnamneseCorporalService(IMapper _mapper, AppDbContext context) : base(context)
+    public AnamneseCorporalService(IMapper mapper, AppDbContext context) : base(context)
     {
-        mapper = _mapper;
+        _mapper = mapper;
     }
 
-    public async Task<AnamneseCorporalDto> ObterPorId(long id)
+    public async Task<AnamneseCorporalDto> AtualizarAsync(long id, AnamneseCorporalDto anamneseCorporalDto)
     {
-        var anamnese = await ObterAsync(id);
+        var anamneseCorporal = await ObterAsync(id, anamneseCorporalDto.UsuarioId);
+        if (anamneseCorporal is null)
+            throw new NotFoundException("Anamnese não encontrada");
+        _mapper.Map(anamneseCorporalDto, anamneseCorporal);
+        anamneseCorporal = await AtualizarAsync(anamneseCorporal);
+        return _mapper.Map<AnamneseCorporalDto>(anamneseCorporal);
+    }
+
+    public async Task<AnamneseCorporalDto> InserirAsync(AnamneseCorporalDto anamneseCorporalDto)
+    {
+        var anamneseCorporal = new AnamneseCorporal();
+        _mapper.Map(anamneseCorporalDto, anamneseCorporal);
+        anamneseCorporal = await InserirAsync(anamneseCorporal);
+        return _mapper.Map<AnamneseCorporalDto>(anamneseCorporal);
+    }
+
+    public async Task<AnamneseCorporalDto> ObterPorId(long id, string usuarioId)
+    {
+        var anamnese = await ObterAsync(id, usuarioId);
         if(anamnese is null)
             throw new NotFoundException("Anamnese não encontrada");
 
-        return mapper.Map<AnamneseCorporalDto>(anamnese);
+        return _mapper.Map<AnamneseCorporalDto>(anamnese);
     }
 
-    public async Task<List<AnamneseCorporalDto>> TodosPorCliente(long clienteId)
+    public async Task<List<AnamneseCorporalDto>> TodosPorCliente(long clienteId, string usuarioId)
     {
-        var anamneses = _context.AnamnesesCorporais.Where(x => x.ClienteId == clienteId);
-        return mapper.Map<List<AnamneseCorporalDto>>( await anamneses.ToListAsync());
+        var anamneses = _context
+            .AnamnesesCorporais
+            .Where(x => 
+            x.ClienteId == clienteId
+            && x.UsuarioId.Equals(usuarioId, StringComparison.InvariantCultureIgnoreCase));
+        return _mapper.Map<List<AnamneseCorporalDto>>( await anamneses.ToListAsync());
     }
 }
