@@ -2,6 +2,7 @@ using ClinicasCRM.Api.Servicos.Agendamento.Interfaces;
 using ClinicasCRM.Core.Common;
 using ClinicasCRM.Core.Dtos.Agendamento;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ClinicasCRM.Api.Controllers.Agendamento;
 
@@ -25,23 +26,23 @@ public class AgendamentoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> TodosAsync()
+    public async Task<IActionResult> TodosAsync(ClaimsPrincipal usuario)
     {
-        return Ok(await _agendamentoService.TodosAsync());
+        return Ok(await _agendamentoService.TodosAsync(usuario.Identity?.Name ?? string.Empty));
     }
 
     [HttpGet("{id:long}", Name = "ObterPorId")]
-    public async Task<IActionResult> ObterPorId(long id)
+    public async Task<IActionResult> ObterPorId(long id, ClaimsPrincipal usuario)
     {
-        var agendamento = await _agendamentoService.ObterPorIdAsync(id);
+        var agendamento = await _agendamentoService.ObterPorIdAsync(id, usuario.Identity?.Name ?? string.Empty);
         if (agendamento is null) return NotFound("Agendamento não encontrado");
         return Ok(agendamento);
     }
 
     [HttpGet("data/{data:datetime}")]
-    public async Task<IActionResult> ObterPorData([FromQuery] DateTime data, [FromQuery] ParametrosPaginacao parametrosPaginacao)
+    public async Task<IActionResult> ObterPorData([FromQuery] DateTime data, [FromQuery] ParametrosPaginacao parametrosPaginacao, ClaimsPrincipal usuario)
     {
-        return Ok(await _agendamentoService.TodosPorDataAsync(data, parametrosPaginacao));
+        return Ok(await _agendamentoService.TodosPorDataAsync(data, usuario.Identity?.Name ?? string.Empty, parametrosPaginacao));
     }
 
     [HttpPut]
@@ -53,21 +54,21 @@ public class AgendamentoController : ControllerBase
     }
 
     [HttpGet("cliente/{clienteId:long}")]
-    public async Task<IActionResult> TodosPorCliente(long clienteId, ParametrosPaginacao parametrosPaginacao)
+    public async Task<IActionResult> TodosPorCliente(long clienteId, ParametrosPaginacao parametrosPaginacao, ClaimsPrincipal usuario)
     {
-        return Ok(await _agendamentoService.TodosPorClienteAsync(clienteId, parametrosPaginacao));
+        return Ok(await _agendamentoService.TodosPorClienteAsync(clienteId, usuario.Identity?.Name ?? string.Empty, parametrosPaginacao));
     }
 
     [HttpGet("periodoData")]
-    public async Task<IActionResult> TodosPorData([FromQuery] DateTime dataInicial, [FromQuery] DateTime dataFinal)
+    public async Task<IActionResult> TodosPorData([FromQuery] DateTime dataInicial, [FromQuery] DateTime dataFinal, ClaimsPrincipal usuario)
     {
-        return Ok(await _agendamentoService.TodosPorDataAsync(dataInicial, dataFinal));
+        return Ok(await _agendamentoService.TodosPorDataAsync(dataInicial, dataFinal, usuario.Identity?.Name ?? string.Empty));
     }
 
     [HttpDelete("{id:long}")]
-    public async Task<IActionResult> Excluir(long id)
+    public async Task<IActionResult> Excluir(long id, ClaimsPrincipal usuario)
     {
-        await _agendamentoService.DeletarAsync(id);
-        return Ok();
+        await _agendamentoService.DeletarAsync(id, usuario.Identity?.Name ?? string.Empty);
+        return NoContent();
     }
 }
