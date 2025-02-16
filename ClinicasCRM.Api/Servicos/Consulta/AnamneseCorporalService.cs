@@ -1,29 +1,35 @@
 ﻿using AutoMapper;
-using ClinicasCRM.Api.Repositorios.Consulta;
+using ClinicasCRM.Api.Data;
 using ClinicasCRM.Api.Servicos.Base;
 using ClinicasCRM.Api.Servicos.Consulta.Interfaces;
 using ClinicasCRM.Core.Dtos.Consulta;
 using ClinicasCRM.Core.Exceptions;
 using ClinicasCRM.Core.Models.Consulta;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicasCRM.Api.Servicos.Consulta;
 
-public class AnamneseCorporalService(IMapper _mapper) : ServicoBase<AnamneseCorporal, AnamneseCorporalRepositorio>, IAnamneseCorporalService
+public class AnamneseCorporalService : ServicoBase<AnamneseCorporal>, IAnamneseCorporalService
 {
-    
+    private readonly IMapper mapper;
+
+    public AnamneseCorporalService(IMapper _mapper, AppDbContext context) : base(context)
+    {
+        mapper = _mapper;
+    }
+
     public async Task<AnamneseCorporalDto> ObterPorId(long id)
     {
         var anamnese = await ObterAsync(id);
         if(anamnese is null)
             throw new NotFoundException("Anamnese não encontrada");
 
-        return _mapper.Map<AnamneseCorporalDto>(anamnese);
+        return mapper.Map<AnamneseCorporalDto>(anamnese);
     }
 
     public async Task<List<AnamneseCorporalDto>> TodosPorCliente(long clienteId)
     {
-        var anamneses = await TodosAsync();
-        anamneses = anamneses.Where(a => a.ClienteId == clienteId).ToList();
-        return _mapper.Map<List<AnamneseCorporalDto>>(anamneses);
+        var anamneses = _context.AnamnesesCorporais.Where(x => x.ClienteId == clienteId);
+        return mapper.Map<List<AnamneseCorporalDto>>( await anamneses.ToListAsync());
     }
 }
