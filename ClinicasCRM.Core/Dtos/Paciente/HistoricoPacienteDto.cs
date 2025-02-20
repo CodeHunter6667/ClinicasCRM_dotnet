@@ -16,6 +16,7 @@ public class HistoricoPacienteDto
     public bool Epilepsia { get; set; }
     public bool FazTratamentoMedico { get; set; }
     public long ClienteId { get; set; }
+    public string UsuarioId { get; set; }
 
     public HistoricoPacienteDto(HistoricoPaciente historico)
     {
@@ -31,6 +32,7 @@ public class HistoricoPacienteDto
         Epilepsia = historico.Epilepsia;
         FazTratamentoMedico = historico.FazTratamentoMedico;
         ClienteId = historico.ClienteId;
+        UsuarioId = historico.UsuarioId;
     }
 
     [JsonConstructor]

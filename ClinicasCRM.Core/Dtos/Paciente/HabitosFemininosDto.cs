@@ -24,6 +24,7 @@ public class HabitosFemininosDto
     public bool TemFilhos { get; set; }
     public int QuantosFilhos { get; set; }
     public long ClienteId { get; set; }
+    public string UsuarioId { get; set; }
 
     public HabitosFemininosDto(HabitosFemininos habitos)
     {
@@ -46,6 +47,7 @@ public class HabitosFemininosDto
         TemFilhos = habitos.TemFilhos;
         QuantosFilhos = habitos.QuantosFilhos;
         ClienteId = habitos.ClienteId;
+        UsuarioId = habitos.UsuarioId;
     }
 
     [JsonConstructor]

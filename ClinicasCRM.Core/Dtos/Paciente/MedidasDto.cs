@@ -18,6 +18,7 @@ public class MedidasDto
     public double PanturrilhaDireita { get; set; }
     public DateTime DataMedicao { get; set; }
     public long ClienteId { get; set; }
+    public string UsuarioId { get; set; }
 
     public MedidasDto(Medidas medidas)
     {
@@ -35,6 +36,7 @@ public class MedidasDto
         PanturrilhaDireita = medidas.PanturrilhaDireita;
         DataMedicao = medidas.DataMedicao;
         ClienteId = medidas.ClienteId;
+        UsuarioId = medidas.UsuarioId;
     }
 
     [JsonConstructor]

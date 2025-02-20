@@ -18,6 +18,7 @@ public class HabitosMasculinosDto
     public string AcidosUsados { get; set; } = string.Empty;
     public bool UsaProtetorSolarDiario { get; set; }
     public long ClienteId { get; set; }
+    public string UsuarioId { get; set; }
 
     public HabitosMasculinosDto(HabitosMasculinos habitos)
     {
@@ -34,6 +35,7 @@ public class HabitosMasculinosDto
         AcidosUsados = habitos.AcidosUsados;
         UsaProtetorSolarDiario = habitos.UsaProtetorSolarDiario;
         ClienteId = habitos.ClienteId;
+        UsuarioId = habitos.UsuarioId;
     }
 
     [JsonConstructor]
