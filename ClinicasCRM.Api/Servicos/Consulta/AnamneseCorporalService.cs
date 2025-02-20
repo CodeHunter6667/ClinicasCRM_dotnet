@@ -54,4 +54,12 @@ public class AnamneseCorporalService : ServicoBase<AnamneseCorporal>, IAnamneseC
             && x.UsuarioId.Equals(usuarioId, StringComparison.InvariantCultureIgnoreCase));
         return _mapper.Map<List<AnamneseCorporalDto>>( await anamneses.ToListAsync());
     }
+
+    Task<List<AnamneseCorporalDto>> IAnamneseCorporalService.TodosAsync(string usuarioId)
+    {
+        var anamneses = _context
+            .AnamnesesCorporais
+            .Where(x => x.UsuarioId.Equals(usuarioId, StringComparison.InvariantCultureIgnoreCase));
+        return _mapper.ProjectTo<AnamneseCorporalDto>(anamneses).ToListAsync();
+    }
 }
