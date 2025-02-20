@@ -45,11 +45,11 @@ public class AgendamentoController : ControllerBase
         return Ok(await _agendamentoService.TodosPorDataAsync(data, usuario.Identity?.Name ?? string.Empty, parametrosPaginacao));
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Atualizar(AgendamentoDto agendamentoDto)
+    [HttpPut("{id:long}")]
+    public async Task<IActionResult> Atualizar(long id, AgendamentoDto agendamentoDto)
     {
         if (agendamentoDto is null) return BadRequest("Agendamento inválido");
-        var agendamento = await _agendamentoService.AtualizarAsync(agendamentoDto);
+        var agendamento = await _agendamentoService.AtualizarAsync(id, agendamentoDto);
         return Ok(agendamento);
     }
 

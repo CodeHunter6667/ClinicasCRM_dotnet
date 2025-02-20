@@ -19,9 +19,9 @@ public class AgendamentoService : ServicoBase<ClinicasCRM.Core.Models.Agendament
         mapper = _mapper;
     }
 
-    public async Task<AgendamentoDto> AtualizarAsync(AgendamentoDto agendamentoDto)
+    public async Task<AgendamentoDto> AtualizarAsync(long id, AgendamentoDto agendamentoDto)
     {
-        var agendamento = await ObterAsync(agendamentoDto.Id, agendamentoDto.UsuarioId);
+        var agendamento = await ObterAsync(id, agendamentoDto.UsuarioId);
         if (agendamento is null)
             throw new NotFoundException("Agendamento não encontrado");
         agendamento = mapper.Map(agendamentoDto, agendamento);

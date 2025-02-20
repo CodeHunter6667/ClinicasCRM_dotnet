@@ -12,5 +12,5 @@ public interface IAgendamentoService : IServicoBase<ClinicasCRM.Core.Models.Agen
     Task<List<AgendamentoDto>> TodosPorDataAsync(DateTime dataInicial, DateTime dataFinal, string usuarioId);
     Task<AgendamentoDto> ObterPorIdAsync(long id, string usuarioId);
     Task<AgendamentoDto> InserirAsync(AgendamentoDto agendamentoDto);
-    Task<AgendamentoDto> AtualizarAsync(AgendamentoDto agendamentoDto);
+    Task<AgendamentoDto> AtualizarAsync(long id, AgendamentoDto agendamentoDto);
 }
