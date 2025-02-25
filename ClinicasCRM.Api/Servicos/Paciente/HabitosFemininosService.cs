@@ -6,6 +6,7 @@ using ClinicasCRM.Api.Servicos.Paciente.Interfaces;
 using ClinicasCRM.Core.Dtos.Paciente;
 using ClinicasCRM.Core.Exceptions;
 using ClinicasCRM.Core.Models.Paciente;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicasCRM.Api.Servicos.Paciente;
 
@@ -35,6 +36,16 @@ public class HabitosFemininosService : ServicoBase<HabitosFemininos>, IHabitosFe
         return _mapper.Map<HabitosFemininosDto>(habitos);
     }
 
+    public async Task<List<HabitosFemininosDto>> ObterPorCliente(long clienteId, string usuarioId)
+    {
+        var habitos = _context.HabitosFemininos
+        .AsNoTracking()
+        .Where(x =>
+        x.ClienteId == clienteId
+        && x.UsuarioId.Equals(usuarioId, StringComparison.InvariantCultureIgnoreCase));
+        return _mapper.Map<List<HabitosFemininosDto>>(await habitos.ToListAsync());
+    }
+
     public async Task<HabitosFemininosDto> ObterPorIdAsync(long id, string usuarioId)
     {
         var habitos = await ObterAsync(id, usuarioId);
@@ -43,8 +54,12 @@ public class HabitosFemininosService : ServicoBase<HabitosFemininos>, IHabitosFe
         return _mapper.Map<HabitosFemininosDto>(habitos);
     }
 
-    public Task<HabitosFemininosDto> TodosAsync(ClaimsPrincipal usuario)
+    public async Task<List<HabitosFemininosDto>> TodosAsync(string usuarioId)
     {
-        throw new NotImplementedException();
+        var habitos = _context.HabitosFemininos
+        .AsNoTracking()
+        .Where(x =>
+        x.UsuarioId.Equals(usuarioId, StringComparison.InvariantCultureIgnoreCase));
+        return _mapper.Map<List<HabitosFemininosDto>>(await habitos.ToListAsync());
     }
 }
