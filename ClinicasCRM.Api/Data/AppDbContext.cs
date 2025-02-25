@@ -19,6 +19,7 @@ public class AppDbContext : DbContext
     public DbSet<Procedimento> Procedimentos { get; set; }
     public DbSet<HabitosMasculinos> HabitosMasculinos { get; set; }
     public DbSet<HabitosFemininos> HabitosFemininos { get; set; }
+    public DbSet<HistoricoPaciente> HistoricoPacientes { get; set; }
     public DbSet<Medidas> Medidas { get; set; }
     public DbSet<AnamneseCorporal> AnamnesesCorporais { get; set; }
     public DbSet<AnamneseFacial> AnamnesesFaciais { get; set; }
