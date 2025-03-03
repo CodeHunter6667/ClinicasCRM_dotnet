@@ -1,7 +1,7 @@
 using ClinicasCRM.Core.Enums;
 using ClinicasCRM.Core.Models.Base;
 
-namespace ClinicasCRM.Core.Models.Pessoa;
+namespace ClinicasCRM.Core.Models.Person;
 
 public class Professional : BasePerson
 {

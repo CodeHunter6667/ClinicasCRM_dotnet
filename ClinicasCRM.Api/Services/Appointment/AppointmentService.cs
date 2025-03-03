@@ -20,14 +20,14 @@ public class AppointmentService : BaseService<ClinicasCRM.Core.Models.Appointmen
     
     public async Task<List<AppointmentDto>> GetAllByClientAsync(long clientId, string userId, int pageSize, int pageNumber)
     {
-        var appointments = _context.Appoitments
+        var appointments = await _context.Appoitments
                                         .AsNoTracking()
                                         .Where(a => a.ClientId == clientId && a.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase))
                                         .Skip((pageNumber - 1) * pageSize)
                                         .Take(pageSize)
-                                        .OrderBy(a => a.AppoitmentDate);
-        var appointmentsList = await appointments.ToListAsync();
-        return _mapper.Map<List<AppointmentDto>>(appointmentsList);
+                                        .OrderBy(a => a.AppoitmentDate)
+                                        .ToListAsync();
+        return _mapper.Map<List<AppointmentDto>>(appointments);
     }
 
     public async Task<List<AppointmentDto>> GetAllAsync(string userId, int pageSize, int pageNumber)
@@ -72,7 +72,7 @@ public class AppointmentService : BaseService<ClinicasCRM.Core.Models.Appointmen
         return _mapper.Map<AppointmentDto>(appointment);
     }
 
-    public async Task<AppointmentDto> InsertAsync(AppointmentDto dto, string username)
+    public async Task<AppointmentDto> InsertAsync(AppointmentDto dto, string username, string userId)
     {
         var existAppointment = await GetAll(dto.UserId);
         if (existAppointment.Any(a =>
@@ -81,18 +81,18 @@ public class AppointmentService : BaseService<ClinicasCRM.Core.Models.Appointmen
             throw new BadRequestException("Já existe um agendamento para esse dia");
         
         var appointment = _mapper.Map<ClinicasCRM.Core.Models.Appointment.Appointment>(dto);
-        appointment = await Insert(appointment, username);
+        appointment = await Insert(appointment, username, userId);
         return _mapper.Map<AppointmentDto>(appointment);
     }
 
-    public async Task<AppointmentDto> UpdateAsync(long id, AppointmentDto dto, string username)
+    public async Task<AppointmentDto> UpdateAsync(long id, AppointmentDto dto, string username, string userId)
     {
         var existAppointment = await GetById(id, dto.UserId);
         if (existAppointment is null)
             throw new NotFoundException("Agendamento não econtrado");
 
         var updatedAppointment = _mapper.Map(dto, existAppointment);
-        await Update(updatedAppointment, username);
+        await Update(updatedAppointment, username, userId);
         
         return _mapper.Map<AppointmentDto>(updatedAppointment);
     }

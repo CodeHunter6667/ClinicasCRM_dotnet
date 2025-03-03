@@ -9,6 +9,6 @@ public interface IBodyAnamnesisService : IBaseService<BodyAnamnesis>
     Task<List<BodyAnamnesisDto>> GetAllByClientAsync(long clientId, string userId);
     Task<List<BodyAnamnesisDto>> GetAllAsync(string userId);
     Task<BodyAnamnesisDto> GetByIdAsync(long id, string userId);
-    Task<BodyAnamnesisDto> InsertAsync(BodyAnamnesisDto dto, string username);
-    Task<BodyAnamnesisDto> UpdateAsync(long id, BodyAnamnesisDto dto, string username);
+    Task<BodyAnamnesisDto> InsertAsync(BodyAnamnesisDto dto, string username, string userid);
+    Task<BodyAnamnesisDto> UpdateAsync(long id, BodyAnamnesisDto dto, string username, string userId);
 }

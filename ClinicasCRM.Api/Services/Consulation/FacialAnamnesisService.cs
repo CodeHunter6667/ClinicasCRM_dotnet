@@ -17,11 +17,11 @@ public class FacialAnamnesisService : BaseService<FacialAnamnesis>, IFacialAnamn
         _mapper = mapper;
     }
 
-    public async Task<FacialAnamnesisDto> InsertAsync(FacialAnamnesisDto dto, string username)
+    public async Task<FacialAnamnesisDto> InsertAsync(FacialAnamnesisDto dto, string username, string userId)
     {
         var anamnese = new FacialAnamnesis();
         _mapper.Map(dto, anamnese);
-        var newAnamnese = await Insert(anamnese, username);
+        var newAnamnese = await Insert(anamnese, username, userId);
         return _mapper.Map<FacialAnamnesisDto>(newAnamnese);
     }
 
@@ -52,13 +52,13 @@ public class FacialAnamnesisService : BaseService<FacialAnamnesis>, IFacialAnamn
         return _mapper.Map<FacialAnamnesisDto>(anamnese);
     }
 
-    public async Task<FacialAnamnesisDto> UpdateAsync(long id, FacialAnamnesisDto dto, string username)
+    public async Task<FacialAnamnesisDto> UpdateAsync(long id, FacialAnamnesisDto dto, string username, string userId)
     {
-        var anamnese = await GetById(id, dto.UserId);
+        var anamnese = await GetById(id, userId);
         if (anamnese is null)
             throw new NotFoundException("Anamnese facial não encontrada");
         _mapper.Map(dto, anamnese);
-        anamnese = await Update(anamnese, username);
+        anamnese = await Update(anamnese, username, userId);
         return _mapper.Map<FacialAnamnesisDto>(anamnese);
     }
 }

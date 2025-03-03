@@ -10,6 +10,6 @@ public interface IAppointmentService : IBaseService<ClinicasCRM.Core.Models.Appo
     Task<List<AppointmentDto>> GetAllByDateAsync(DateTime date, string userId, int pageSize, int pageNumber);
     Task<List<AppointmentDto>> GetAllByDateAsync(DateTime initialDate, DateTime endDate, string userId);
     Task<AppointmentDto> GetByIdAsync(long id, string userId);
-    Task<AppointmentDto> InsertAsync(AppointmentDto dto, string username);
-    Task<AppointmentDto> UpdateAsync(long id, AppointmentDto dto, string username);
+    Task<AppointmentDto> InsertAsync(AppointmentDto dto, string username, string userId);
+    Task<AppointmentDto> UpdateAsync(long id, AppointmentDto dto, string username, string userId);
 }

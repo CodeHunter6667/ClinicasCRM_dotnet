@@ -1,5 +1,4 @@
-﻿using ClinicasCRM.Core.Models.Pessoa;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using ClinicasCRM.Core.Models.Person;
 
 namespace ClinicasCRM.Core.Dtos.Person;

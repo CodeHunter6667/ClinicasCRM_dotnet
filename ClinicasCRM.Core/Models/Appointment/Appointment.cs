@@ -1,7 +1,6 @@
 using ClinicasCRM.Core.Enums;
 using ClinicasCRM.Core.Models.Base;
 using ClinicasCRM.Core.Models.Person;
-using ClinicasCRM.Core.Models.Pessoa;
 
 namespace ClinicasCRM.Core.Models.Appointment;
 public class Appointment : BaseEntity

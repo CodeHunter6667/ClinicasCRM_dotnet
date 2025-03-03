@@ -36,34 +36,36 @@ public abstract class BaseService<T> :
         return entity;
     }
 
-    public async Task InsertOrUpdate(T entity, string username)
+    public async Task InsertOrUpdate(T entity, string username, string userId)
     {
         if (entity is null)
             throw new ArgumentNullException("Dados inválidos");
 
         if (entity.IsSaved)
-            await Update(entity, username);
+            await Update(entity, username, userId);
         else
-            await Insert(entity, username);
+            await Insert(entity, username, userId);
     }
 
-    public async Task<T> Update(T entity, string username)
+    public async Task<T> Update(T entity, string username, string userId)
     {
         if (entity is null)
             throw new ArgumentNullException("Dados inválidos");
         entity.UpdatedAt = DateTime.Now;
         entity.UpdatedBy = username;
+        entity.UserId = userId;
         _context.Update(entity);
         await _context.SaveChangesAsync();
         return entity;
     }
 
-    public async Task<T> Insert(T entity, string username)
+    public async Task<T> Insert(T entity, string username, string userId)
     {
         if (entity is null)
             throw new ArgumentNullException("Dados inválidos");
         entity.CreatedAt = DateTime.Now;
         entity.CreatedBy = username;
+        entity.UserId = userId;
         await _context.Set<T>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return entity;

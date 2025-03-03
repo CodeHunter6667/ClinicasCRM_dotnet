@@ -2,7 +2,7 @@ using ClinicasCRM.Core.Models.Base;
 
 namespace ClinicasCRM.Core.Models.Procedure;
 
-public class PacoteProcedimento : BaseEntity
+public class ProcedurePack : BaseEntity
 {
     public string PackName { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;

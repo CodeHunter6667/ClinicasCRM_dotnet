@@ -46,21 +46,21 @@ public class BodyAnamnesisService : BaseService<BodyAnamnesis>, IBodyAnamnesisSe
         return _mapper.Map<BodyAnamnesisDto>(anamnese);
     }
 
-    public async Task<BodyAnamnesisDto> InsertAsync(BodyAnamnesisDto dto, string username)
+    public async Task<BodyAnamnesisDto> InsertAsync(BodyAnamnesisDto dto, string username, string userId)
     {
         var anamnese = new BodyAnamnesis();
         _mapper.Map(dto, anamnese);
-        var newAnamnese = await Insert(anamnese, username);
+        var newAnamnese = await Insert(anamnese, username, userId);
         return _mapper.Map<BodyAnamnesisDto>(newAnamnese);
     }
 
-    public async Task<BodyAnamnesisDto> UpdateAsync(long id, BodyAnamnesisDto dto, string username)
+    public async Task<BodyAnamnesisDto> UpdateAsync(long id, BodyAnamnesisDto dto, string username, string userId)
     {
-        var anamnese = await GetById(id, dto.UserId);
+        var anamnese = await GetById(id, userId);
         if (anamnese is null)
             throw new NotFoundException("Anamnese não encontrada");
         _mapper.Map(dto, anamnese);
-        var updatedAnamnese = await Update(anamnese, username);
+        var updatedAnamnese = await Update(anamnese, username, userId);
         return _mapper.Map<BodyAnamnesisDto>(updatedAnamnese);
     }
 }
