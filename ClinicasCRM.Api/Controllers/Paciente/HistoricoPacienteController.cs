@@ -37,14 +37,14 @@ public class HistoricoPacienteController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Inserir(HistoricoPacienteDto dto)
+    public async Task<IActionResult> Inserir(PatientHistoryDto dto)
     {
         var historico = await _historicoPacienteService.InserirAsync(dto);
         return new CreatedAtRouteResult("ObterPorId", new { id = historico.Id }, historico);
     }
 
     [HttpPut("{id:long}")]
-    public async Task<IActionResult> Atualizar(long id, HistoricoPacienteDto dto)
+    public async Task<IActionResult> Atualizar(long id, PatientHistoryDto dto)
     {
         var historico = await _historicoPacienteService.AtualizarAsync(id, dto);
         return historico == null ? NotFound("Historico não encontrado") : Ok(historico);

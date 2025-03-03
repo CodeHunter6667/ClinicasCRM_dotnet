@@ -9,23 +9,23 @@ namespace ClinicasCRM.Api.Controllers.Consulta;
 [Route("api/v1/[controller]")]
 public class AnamneseCorporalController : ControllerBase
 {
-    private readonly IAnamneseCorporalService _anamneseCorporalService;
+    private readonly IBodyAnamnesisService _bodyAnamnesisService;
 
-    public AnamneseCorporalController(IAnamneseCorporalService anamneseCorporalService)
+    public AnamneseCorporalController(IBodyAnamnesisService bodyAnamnesisService)
     {
-        _anamneseCorporalService = anamneseCorporalService;
+        _bodyAnamnesisService = bodyAnamnesisService;
     }
 
     [HttpGet]
     public async Task<IActionResult> Todos(ClaimsPrincipal usuario)
     {
-        return Ok(await _anamneseCorporalService.TodosAsync(usuario.Identity?.Name ?? string.Empty));
+        return Ok(await _bodyAnamnesisService.GetAllAsync(usuario.Identity?.Name ?? string.Empty));
     }
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> ObterPorId(long id, ClaimsPrincipal usuario)
     {
-        var anamneseCorporal = await _anamneseCorporalService.ObterPorId(id, usuario.Identity?.Name ?? string.Empty);
+        var anamneseCorporal = await _bodyAnamnesisService.GetByIdAsync(id, usuario.Identity?.Name ?? string.Empty);
         if (anamneseCorporal is null) return NotFound("Anamnese corporal não encontrada");
         return Ok(anamneseCorporal);
     }
@@ -34,7 +34,7 @@ public class AnamneseCorporalController : ControllerBase
     public async Task<IActionResult> Inserir(AnamneseCorporalDto anamneseCorporalDto)
     {
         if (anamneseCorporalDto is null) return BadRequest("Anamnese corporal inválida");
-        var anamneseCorporal = await _anamneseCorporalService.InserirAsync(anamneseCorporalDto);
+        var anamneseCorporal = await _bodyAnamnesisService.InsertAsync(anamneseCorporalDto);
         return new CreatedAtRouteResult("ObterPorId", new { id = anamneseCorporal.Id }, anamneseCorporal);
     }
 
@@ -42,20 +42,20 @@ public class AnamneseCorporalController : ControllerBase
     public async Task<IActionResult> Atualizar(long id, AnamneseCorporalDto anamneseCorporalDto)
     {
         if (anamneseCorporalDto is null) return BadRequest("Anamnese corporal inválida");
-        var anamneseCorporal = await _anamneseCorporalService.AtualizarAsync(id, anamneseCorporalDto);
+        var anamneseCorporal = await _bodyAnamnesisService.UpdateAsync(id, anamneseCorporalDto);
         return Ok(anamneseCorporal);
     }
 
     [HttpGet("cliente/{clienteId:long}")]
     public async Task<IActionResult> TodosPorCliente(long clienteId, ClaimsPrincipal usuario)
     {
-        return Ok(await _anamneseCorporalService.TodosPorCliente(clienteId, usuario.Identity?.Name ?? string.Empty));
+        return Ok(await _bodyAnamnesisService.GetAllByClientAsync(clienteId, usuario.Identity?.Name ?? string.Empty));
     }
 
     [HttpDelete("{id:long}")]
     public async Task<IActionResult> Deletar(long id, ClaimsPrincipal usuario)
     {
-        await _anamneseCorporalService.DeletarAsync(id, usuario.Identity?.Name ?? string.Empty);
+        await _bodyAnamnesisService.DeletarAsync(id, usuario.Identity?.Name ?? string.Empty);
         return NoContent();
     }
 }

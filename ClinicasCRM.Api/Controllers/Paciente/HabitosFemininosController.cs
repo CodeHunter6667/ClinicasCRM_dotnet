@@ -36,18 +36,18 @@ public class HabitosFemininosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Inserir(HabitosFemininosDto habitosFemininosDto)
+    public async Task<IActionResult> Inserir(FemaleHabitsDto femaleHabitsDto)
     {
-        if (habitosFemininosDto is null) return BadRequest("Hábitos femininos inválidos");
-        var habitosFemininos = await _habitosFemininosService.InserirAsync(habitosFemininosDto);
+        if (femaleHabitsDto is null) return BadRequest("Hábitos femininos inválidos");
+        var habitosFemininos = await _habitosFemininosService.InserirAsync(femaleHabitsDto);
         return new CreatedAtRouteResult("ObterPorId", new { id = habitosFemininos.Id }, habitosFemininos);
     }
 
     [HttpPut("{id:long}")]
-    public async Task<IActionResult> Atualizar(long id, HabitosFemininosDto habitosFemininosDto)
+    public async Task<IActionResult> Atualizar(long id, FemaleHabitsDto femaleHabitsDto)
     {
-        if (habitosFemininosDto is null) return BadRequest("Hábitos femininos inválidos");
-        var habitosFemininos = await _habitosFemininosService.AtualizarAsync(id, habitosFemininosDto);
+        if (femaleHabitsDto is null) return BadRequest("Hábitos femininos inválidos");
+        var habitosFemininos = await _habitosFemininosService.AtualizarAsync(id, femaleHabitsDto);
         return Ok(habitosFemininos);
     }
 

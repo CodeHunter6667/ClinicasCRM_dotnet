@@ -565,7 +565,7 @@ namespace ClinicasCRM.Api.Migrations
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("TIMESTAMP");
 
-                    b.Property<DateTime?>("DataNascimento")
+                    b.Property<DateTime?>("Birthdate")
                         .HasColumnType("DATE");
 
                     b.Property<string>("Email")

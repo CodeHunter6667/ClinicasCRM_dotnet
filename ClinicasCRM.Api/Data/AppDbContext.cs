@@ -1,8 +1,8 @@
-﻿using ClinicasCRM.Core.Models.Agendamento;
-using ClinicasCRM.Core.Models.Consulta;
-using ClinicasCRM.Core.Models.Paciente;
-using ClinicasCRM.Core.Models.Pessoa;
-using ClinicasCRM.Core.Models.Procedimento;
+﻿using ClinicasCRM.Core.Models.Appointment;
+using ClinicasCRM.Core.Models.Consulation;
+using ClinicasCRM.Core.Models.Patient;
+using ClinicasCRM.Core.Models.Person;
+using ClinicasCRM.Core.Models.Procedure;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -14,16 +14,16 @@ public class AppDbContext : DbContext
     {
     }
 
-    public DbSet<PessoaFisica> PessoasFisicas { get; set; }
-    public DbSet<PessoaJuridica> PessoasJuridicas { get; set; }
-    public DbSet<Procedimento> Procedimentos { get; set; }
-    public DbSet<HabitosMasculinos> HabitosMasculinos { get; set; }
-    public DbSet<HabitosFemininos> HabitosFemininos { get; set; }
-    public DbSet<HistoricoPaciente> HistoricoPacientes { get; set; }
-    public DbSet<Medidas> Medidas { get; set; }
-    public DbSet<AnamneseCorporal> AnamnesesCorporais { get; set; }
-    public DbSet<AnamneseFacial> AnamnesesFaciais { get; set; }
-    public DbSet<Agendamento> Agendamentos { get; set; }
+    public DbSet<Individual> Individuals { get; set; }
+    public DbSet<LegalEntity> LegalEntities { get; set; }
+    public DbSet<Procedure> Procedures { get; set; }
+    public DbSet<MaleHabits> MaleHabits { get; set; }
+    public DbSet<FemaleHabits> FemaleHabits { get; set; }
+    public DbSet<PatientHistory> PatientHistories { get; set; }
+    public DbSet<Measurements> Measurements { get; set; }
+    public DbSet<BodyAnamnesis> BodyAnamnesis { get; set; }
+    public DbSet<FacialAnamnesis> FacialAnamnesis { get; set; }
+    public DbSet<Appointment> Appoitments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

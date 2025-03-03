@@ -39,14 +39,14 @@ public class HabitosMasculinosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Inserir(HabitosMasculinosDto dto)
+    public async Task<IActionResult> Inserir(MaleHabitsDto dto)
     {
         var habitos = await _habitosMasculinosService.InserirAsync(dto);
         return new CreatedAtRouteResult("ObterPorId", new { id = habitos.Id }, habitos);
     }
 
     [HttpPut("{id:long}")]
-    public async Task<IActionResult> Atualizar(long id, HabitosMasculinosDto dto)
+    public async Task<IActionResult> Atualizar(long id, MaleHabitsDto dto)
     {
         var habitos = await _habitosMasculinosService.AtualizarAsync(id, dto);
         return Ok(habitos);

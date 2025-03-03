@@ -8,5 +8,6 @@ namespace ClinicasCRM.Core.Enums;
 public enum ETipoCadastro
 {
     PessoaFisica = 1,
-    PessoaJuridica = 2
+    PessoaJuridica = 2,
+    PessoaProfissional = 3
 }

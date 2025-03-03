@@ -9,23 +9,23 @@ namespace ClinicasCRM.Api.Controllers.Consulta;
 [Route("api/v1/[controller]")]
 public class AnamneseFacialController : ControllerBase
 {
-    private readonly IAnamneseFacialService _anamneseFacialService;
+    private readonly IFacialAnamnesisService _facialAnamnesisService;
 
-    public AnamneseFacialController(IAnamneseFacialService anamneseFacialService)
+    public AnamneseFacialController(IFacialAnamnesisService facialAnamnesisService)
     {
-        _anamneseFacialService = anamneseFacialService;
+        _facialAnamnesisService = facialAnamnesisService;
     }
 
     [HttpGet]
     public async Task<IActionResult> Todos(ClaimsPrincipal usuario)
     {
-        return Ok(await _anamneseFacialService.TodosAsync(usuario.Identity?.Name ?? string.Empty));
+        return Ok(await _facialAnamnesisService.TodosAsync(usuario.Identity?.Name ?? string.Empty));
     }
 
     [HttpGet("{id:long}", Name = "ObterPorId")]
     public async Task<IActionResult> ObterPorId(long id, ClaimsPrincipal usuario)
     {
-        var anamneseFacial = await _anamneseFacialService.ObterPorIdAsync(id, usuario.Identity?.Name ?? string.Empty);
+        var anamneseFacial = await _facialAnamnesisService.ObterPorIdAsync(id, usuario.Identity?.Name ?? string.Empty);
         if (anamneseFacial is null) return NotFound("Anamnese facial não encontrada");
         return Ok(anamneseFacial);
     }
@@ -33,29 +33,29 @@ public class AnamneseFacialController : ControllerBase
     [HttpGet("cliente/{clienteId:long}")]
     public async Task<IActionResult> TodosPorCliente(long clienteId, ClaimsPrincipal usuario)
     {
-        return Ok(await _anamneseFacialService.TodosPorClienteAsync(clienteId, usuario.Identity?.Name ?? string.Empty));
+        return Ok(await _facialAnamnesisService.TodosPorClienteAsync(clienteId, usuario.Identity?.Name ?? string.Empty));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Inserir(AnamneseFacialDto dto)
+    public async Task<IActionResult> Inserir(FacialAnamnesisDto anamnesisDto)
     {
-        if (dto is null) return BadRequest("Anamnese facial inválida");
-        var anamneseFacial = await _anamneseFacialService.InserirAsync(dto);
+        if (anamnesisDto is null) return BadRequest("Anamnese facial inválida");
+        var anamneseFacial = await _facialAnamnesisService.InserirAsync(anamnesisDto);
         return new CreatedAtRouteResult("ObterPorId", new { id = anamneseFacial.Id }, anamneseFacial);
     }
 
     [HttpPut("{id:long}")]
-    public async Task<IActionResult> Atualizar(long id, AnamneseFacialDto dto)
+    public async Task<IActionResult> Atualizar(long id, FacialAnamnesisDto anamnesisDto)
     {
-        if (dto is null) return BadRequest("Anamnese facial inválida");
-        var anamneseFacial = await _anamneseFacialService.AtualizarAsync(id, dto);
+        if (anamnesisDto is null) return BadRequest("Anamnese facial inválida");
+        var anamneseFacial = await _facialAnamnesisService.AtualizarAsync(id, anamnesisDto);
         return Ok(anamneseFacial);
     }
 
     [HttpDelete("{id:long}")]
     public async Task<IActionResult> Deletar(long id, ClaimsPrincipal usuario)
     {
-        await _anamneseFacialService.DeletarAsync(id, usuario.Identity?.Name ?? string.Empty);
+        await _facialAnamnesisService.DeletarAsync(id, usuario.Identity?.Name ?? string.Empty);
         return NoContent();
     }
 }
