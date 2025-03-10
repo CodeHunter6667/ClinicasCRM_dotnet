@@ -3,7 +3,7 @@ using ClinicasCRM.Api.Services.Consulation.Interfaces;
 using ClinicasCRM.Core.Dtos.Consulation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClinicasCRM.Api.Controllers.Consulta;
+namespace ClinicasCRM.Api.Controllers.Consulation;
 
 [ApiController]
 [Route("api/v1/[controller]")]

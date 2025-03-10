@@ -3,7 +3,7 @@ using ClinicasCRM.Core.Dtos.Appointment;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace ClinicasCRM.Api.Controllers.Agendamento;
+namespace ClinicasCRM.Api.Controllers.Appointment;
 
 [ApiController]
 [Route("api/v1/[controller]")]

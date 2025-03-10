@@ -3,7 +3,7 @@ using ClinicasCRM.Api.Services.Patient.Interfaces;
 using ClinicasCRM.Core.Dtos.Patient;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClinicasCRM.Api.Controllers.Paciente;
+namespace ClinicasCRM.Api.Controllers.Patient;
 
 [ApiController]
 [Route("api/v1/[controller]")]
