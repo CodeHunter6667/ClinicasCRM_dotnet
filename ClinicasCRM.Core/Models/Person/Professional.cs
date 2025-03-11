@@ -8,7 +8,7 @@ public class Professional : BasePerson
     public ETipoProfissional Type { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Cpf { get; set; } = string.Empty;
-    public DateTime Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
 
     public string ProfessionalNumber { get; set; } = string.Empty;
     public string ProfessionalCouncil { get; set; } = string.Empty;

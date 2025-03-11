@@ -38,7 +38,8 @@ public class AppointmentMapping : IEntityTypeConfiguration<ClinicasCRM.Core.Mode
 
         builder.Property(x => x.UserId)
             .IsRequired()
-            .HasColumnType("BIGINT");
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(80);
 
         builder.Property(x => x.ProcedureRoom)
             .IsRequired()

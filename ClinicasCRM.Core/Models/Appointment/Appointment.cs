@@ -13,6 +13,6 @@ public class Appointment : BaseEntity
     public TimeSpan AppoitmentTime { get; set; }
     public DateTime AppoitmentDate { get; set; }
     public long ProfessionalId { get; set; }
-    public Professional Professional { get; set; }
+    public Professional Professional { get; set; } = new();
     public EStatusAtendimento AppoitmentStatus { get; set; }
 }

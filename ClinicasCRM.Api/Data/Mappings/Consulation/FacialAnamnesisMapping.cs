@@ -38,7 +38,8 @@ public class FacialAnamnesisMapping : IEntityTypeConfiguration<FacialAnamnesis>
 
         builder.Property(x => x.UserId)
             .IsRequired()
-            .HasColumnType("BIGINT");
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(80);
 
         builder.Property(a => a.MainComplaints)
            .IsRequired()

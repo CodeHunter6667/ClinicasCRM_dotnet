@@ -37,12 +37,18 @@ public class ProcedurePackMapping : IEntityTypeConfiguration<ProcedurePack>
 
         builder.Property(x => x.UserId)
             .IsRequired()
-            .HasColumnType("BIGINT");
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(80);
 
         builder.Property(x => x.PackName)
             .IsRequired()
             .HasColumnType("VARCHAR")
             .HasMaxLength(100);
+
+        builder.Property(x => x.Description)
+            .IsRequired(false)
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(800);
 
         builder.Property(x => x.Price)
             .IsRequired()

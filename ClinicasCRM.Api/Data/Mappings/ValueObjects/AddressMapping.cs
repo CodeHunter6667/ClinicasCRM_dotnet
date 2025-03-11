@@ -40,7 +40,8 @@ public class AddressMapping : IEntityTypeConfiguration<Address>
 
         builder.Property(x => x.UserId)
             .IsRequired()
-            .HasColumnType("BIGINT");
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(80);
 
         builder.Property(x => x.Street)
             .IsRequired()

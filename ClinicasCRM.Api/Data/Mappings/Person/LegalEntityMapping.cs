@@ -39,7 +39,8 @@ public class LegalEntityMapping : IEntityTypeConfiguration<LegalEntity>
 
         builder.Property(x => x.UserId)
             .IsRequired()
-            .HasColumnType("BIGINT");
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(80);
 
         builder.Property(x => x.Phone)
             .IsRequired(false)
